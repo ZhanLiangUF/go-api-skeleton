@@ -1,1 +1,1 @@
-# go-flights-service
+# go-flights
