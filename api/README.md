@@ -5,7 +5,7 @@ The Flights API is an API that will be used by the angular client to communicate
 It consists of various components in this repository:
 
 - `api/swagger.yaml` A Swagger definition of the API.
-- `api/types/` Types shared by both the client and server, representing various objects, options, responses, etc. Most are written manually, but some are automatically generated from the Swagger definition. See [#27919](https://github.com/docker/docker/issues/27919) for progress on this.
+- `api/types/` Types shared by both the client and server, representing various objects, options, responses, etc. Most are written manually, but some are automatically generated from the Swagger definition. 
 
 ## Swagger definition
 
