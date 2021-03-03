@@ -1,9 +1,8 @@
 package api
 
 import (
-	"net/http"
-
 	"github.com/ZhanLiangUF/go-flights/api/httputils"
+	"net/http"
 )
 
 // Config provides configuration for server
@@ -37,6 +36,12 @@ func (s *Server) InitRouters(routers ...Router) {
 	s.routers = append(s.routers, routers...)
 }
 
-// func (s *Server) createMux() *mux.Router {
-
-// }
+func (s *Server) createMux() *mux.Router {
+	m := mux.NewRouter()
+	logrus.Debug("Registering router")
+	for _, apiRouter := range s.routers {
+		for _, r := range apiRouter.Routes() {
+			f := s.makeHTTPHandler(r.Handler())
+		}
+	}
+}
