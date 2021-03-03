@@ -16,19 +16,22 @@ type localRoute struct {
 	handler httputils.APIFunc
 }
 
+// Handler returns the APIFunc to be used to wrap it in middleware
 func (l localRoute) Handler() httputils.APIFunc {
 	return l.handler
 }
 
+// Method returns the http method that the route responds to
 func (l localRoute) Method() string {
 	return l.method
 }
 
+// Path returns the subpath
 func (l localRoute) Path() string {
 	return l.path
 }
 
-// initializes a new localroute for router
+// NewRoute initializes a new local route for the router
 func NewRoute(method, path string, handler httputils.APIFunc, opts ...RouteWrapper) Route {
 	var r Route = localRoute{method, path, handler}
 	for _, o := range opts {
@@ -37,6 +40,7 @@ func NewRoute(method, path string, handler httputils.APIFunc, opts ...RouteWrapp
 	return r
 }
 
+// NewGetRoute initializes a new route with the http method GET
 func NewGetRoute(path string, handler httputils.APIFunc, opts ...RouteWrapper) Route {
 	return NewRoute(http.MethodGet, path, handler, opts...)
 }
