@@ -1,10 +1,8 @@
-package api // import "github.com/ZhanLiangUF/go-flights/api"
+package api
 
 import (
-	"net/http"
-
 	"github.com/ZhanLiangUF/go-flights/api/httputils"
-	"github.com/gorilla/mux"
+	"net/http"
 )
 
 // Config provides configuration for server
@@ -38,10 +36,9 @@ func (s *Server) InitRouters(routers ...Router) {
 	s.routers = append(s.routers, routers...)
 }
 
-// createMux initializes
 func (s *Server) createMux() *mux.Router {
 	m := mux.NewRouter()
-	// logrus.Debug("Registering router")
+	logrus.Debug("Registering router")
 	for _, apiRouter := range s.routers {
 		for _, r := range apiRouter.Routes() {
 			f := s.makeHTTPHandler(r.Handler())
