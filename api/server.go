@@ -1,9 +1,11 @@
 package api // import "github.com/ZhanLiangUF/go-flights/api"
 
 import (
+	"net"
 	"net/http"
 
 	"github.com/ZhanLiangUF/go-flights/api/httputils"
+	router "github.com/ZhanLiangUF/go-flights/api/router"
 	"github.com/gorilla/mux"
 )
 
@@ -17,7 +19,9 @@ type Config struct {
 // Server contains instance details of the server
 type Server struct {
 	cfg     *Config
-	routers []Router
+	routers []router.Router
+	srv     *http.Server
+	l       net.Listener
 }
 
 // New returns a new instance of the server based on the specified configurations
@@ -27,6 +31,11 @@ func New(cfg *Config) *Server {
 	}
 }
 
+// Serve starts listening for inbound requests
+func (s *Server) Serve() error {
+	return s.srv.Serve(s.l)
+}
+
 func (s *Server) makeHTTPHandler(handler httputils.APIFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
@@ -34,7 +43,7 @@ func (s *Server) makeHTTPHandler(handler httputils.APIFunc) http.HandlerFunc {
 }
 
 // InitRouters initializes the list of routers for the server.
-func (s *Server) InitRouters(routers ...Router) {
+func (s *Server) InitRouters(routers ...router.Router) {
 	s.routers = append(s.routers, routers...)
 }
 

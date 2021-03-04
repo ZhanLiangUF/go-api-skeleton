@@ -1,4 +1,4 @@
-package api // import "github.com/ZhanLiangUF/go-flights/api"
+package router // import "github.com/ZhanLiangUF/go-flights/api/router"
 
 import "github.com/ZhanLiangUF/go-flights/api/httputils"
 
