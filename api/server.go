@@ -7,6 +7,7 @@ import (
 	"github.com/ZhanLiangUF/go-flights/api/httputils"
 	router "github.com/ZhanLiangUF/go-flights/api/router"
 	"github.com/gorilla/mux"
+	"github.com/sirupsen/logrus"
 )
 
 // Config provides configuration for server
@@ -20,8 +21,7 @@ type Config struct {
 type Server struct {
 	cfg     *Config
 	routers []router.Router
-	srv     *http.Server
-	l       net.Listener
+	srv     *HTTPServer
 }
 
 // New returns a new instance of the server based on the specified configurations
@@ -31,9 +31,45 @@ func New(cfg *Config) *Server {
 	}
 }
 
+// Accept sets listener the server accepts connection into
+func (s *Server) Accept(addr string, listener net.Listener) {
+	s.srv = &HTTPServer{
+		srv: &http.Server{
+			Addr: addr,
+		},
+		l: listener,
+	}
+}
+
+// Close closes server and stops receiving requests
+func (s *Server) Close() {
+	if err := s.srv.Close(); err != nil {
+		logrus.Error(err)
+	}
+}
+
+// ServeAPI initialize servers
+func (s *Server) ServeAPI() error {
+	s.srv.srv.Handler = s.createMux()
+
+}
+
+// HTTPServer contains an instance of http server and listener
+type HTTPServer struct {
+	srv *http.Server
+	l   net.Listener
+}
+
 // Serve starts listening for inbound requests
-func (s *Server) Serve() error {
+func (s *HTTPServer) Serve() error {
 	return s.srv.Serve(s.l)
+}
+
+// Close immediately closes all active net.Listeners and any connections in state StateNew, StateActive, or StateIdle. For a graceful shutdown, use Shutdown.
+// Close does not attempt to close (and does not even know about) any hijacked connections, such as WebSockets.
+// Close returns any error returned from closing the Server's underlying Listener(s).
+func (s *HTTPServer) Close() error {
+	return s.l.Close()
 }
 
 func (s *Server) makeHTTPHandler(handler httputils.APIFunc) http.HandlerFunc {
