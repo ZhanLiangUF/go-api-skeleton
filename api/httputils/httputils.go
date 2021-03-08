@@ -5,6 +5,5 @@ import (
 	"net/http"
 )
 
-// APIFunc is an adapter to allow the use of ordinary functions as Docker API endpoints.
-// Any function that has the appropriate signature can be registered as an API endpoint (e.g. getVersion).
+// APIFunc is an adapter to allow the use of ordinary functions as API endpoints.
 type APIFunc func(ctx context.Context, w http.ResponseWriter, r *http.Request, vars map[string]string) error

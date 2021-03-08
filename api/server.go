@@ -5,9 +5,9 @@ import (
 	"net/http"
 
 	"github.com/ZhanLiangUF/go-flights/api/httputils"
+	"github.com/ZhanLiangUF/go-flights/api/middleware"
 	router "github.com/ZhanLiangUF/go-flights/api/router"
 	"github.com/gorilla/mux"
-	"github.com/sirupsen/logrus"
 )
 
 // Config provides configuration for server
@@ -19,9 +19,10 @@ type Config struct {
 
 // Server contains instance details of the server
 type Server struct {
-	cfg     *Config
-	routers []router.Router
-	srv     *HTTPServer
+	cfg        *Config
+	routers    []router.Router
+	srv        *HTTPServer
+	middleware middleware.Middleware
 }
 
 // New returns a new instance of the server based on the specified configurations
@@ -44,14 +45,15 @@ func (s *Server) Accept(addr string, listener net.Listener) {
 // Close closes server and stops receiving requests
 func (s *Server) Close() {
 	if err := s.srv.Close(); err != nil {
-		logrus.Error(err)
+		// logrus.Error(err)
 	}
 }
 
 // ServeAPI initialize servers
 func (s *Server) ServeAPI() error {
 	s.srv.srv.Handler = s.createMux()
-
+	err := s.srv.Serve()
+	return err
 }
 
 // HTTPServer contains an instance of http server and listener
@@ -74,7 +76,11 @@ func (s *HTTPServer) Close() error {
 
 func (s *Server) makeHTTPHandler(handler httputils.APIFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
+		handlerFunc := s.handlerWithGlobalMiddleWare(handler)
+		vars := mux.Vars(r)
+		if vars == nil {
+			vars = make(map[string]string)
+		}
 	}
 }
 
@@ -83,7 +89,7 @@ func (s *Server) InitRouters(routers ...router.Router) {
 	s.routers = append(s.routers, routers...)
 }
 
-// createMux initializes
+// createMux initializes the main router
 func (s *Server) createMux() *mux.Router {
 	m := mux.NewRouter()
 	// logrus.Debug("Registering router")
