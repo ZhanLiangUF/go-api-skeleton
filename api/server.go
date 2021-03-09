@@ -32,6 +32,12 @@ func New(cfg *Config) *Server {
 	}
 }
 
+// UseMiddleware sets a new middleware to the request chain.
+// Needs to be called before API are configured
+func (s *Server) UseMiddleware(m middleware.Middleware) {
+	s.middleware = m
+}
+
 // Accept sets listener the server accepts connection into
 func (s *Server) Accept(addr string, listener net.Listener) {
 	s.srv = &HTTPServer{
