@@ -9,7 +9,6 @@ import (
 	router "github.com/ZhanLiangUF/go-flights/api/router"
 	"github.com/gorilla/mux"
 )
-
 // Config provides configuration for server
 type Config struct {
 	Logging    bool
@@ -51,7 +50,7 @@ func (s *Server) Accept(addr string, listener net.Listener) {
 // Close closes server and stops receiving requests
 func (s *Server) Close() {
 	if err := s.srv.Close(); err != nil {
-		// logrus.Error(err)
+		// log here?
 	}
 }
 
@@ -87,6 +86,11 @@ func (s *Server) makeHTTPHandler(handler httputils.APIFunc) http.HandlerFunc {
 		if vars == nil {
 			vars = make(map[string]string)
 		}
+		// have to take care of error here
+		if err := handlerFunc(ctx, w, r, vars), err != nil {
+			
+		}
+
 	}
 }
 
@@ -98,10 +102,15 @@ func (s *Server) InitRouters(routers ...router.Router) {
 // createMux initializes the main router
 func (s *Server) createMux() *mux.Router {
 	m := mux.NewRouter()
-	// logrus.Debug("Registering router")
+	// log here?
 	for _, apiRouter := range s.routers {
 		for _, r := range apiRouter.Routes() {
 			f := s.makeHTTPHandler(r.Handler())
+			// think about adding version matcher here?
+			m.Path(r.Path()).Methods(r.Method()).Handler(f)
+			// handle
+			m.HandleFunc()
 		}
 	}
+	return m
 }

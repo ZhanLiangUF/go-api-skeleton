@@ -9,12 +9,13 @@ type CORSMiddleware struct {
 	defaultHeaders string
 }
 
-// NewCorsMiddleware creates a new CORSMiddleware with default headers
+// NewCORSMiddleware creates a new CORSMiddleware with default headers
 func NewCORSMiddleware(d string) CORSMiddleware {
 	return CORSMiddleware{defaultHeaders: d}
 }
 
 // WrapHandler returns a new handler function wrapping the previous one in the request chain
+// ResponseWriter is already backed by a pointer implmentation in its interface
 func (c CORSMiddleware) WrapHandler(handler func(ctx context.Context, w http.ResponseWriter, r *http.Request, vars map[string]string) error) func(ctx context.Context, w http.ResponseWriter, r *http.Request, vars map[string]string) error {
 	return func(ctx context.Context, w http.ResponseWriter, r *http.Request, vars map[string]string) error {
 		corsHeader := c.defaultHeaders
