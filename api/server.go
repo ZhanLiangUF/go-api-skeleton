@@ -9,6 +9,10 @@ import (
 	router "github.com/ZhanLiangUF/go-flights/api/router"
 	"github.com/gorilla/mux"
 )
+
+// can access version using mux.vars
+const versionMatcher = "/v{version:[0-9.]+}"
+
 // Config provides configuration for server
 type Config struct {
 	Logging    bool
@@ -107,9 +111,10 @@ func (s *Server) createMux() *mux.Router {
 		for _, r := range apiRouter.Routes() {
 			f := s.makeHTTPHandler(r.Handler())
 			// think about adding version matcher here?
+			m.Path(versionMatcher + r.Path()).Methods(r.Method()).Handler(f)
 			m.Path(r.Path()).Methods(r.Method()).Handler(f)
-			// handle
-			m.HandleFunc()
+
+			// error handler for when reach a part of the site that user shouldnt go?
 		}
 	}
 	return m
