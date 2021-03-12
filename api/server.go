@@ -113,9 +113,13 @@ func (s *Server) createMux() *mux.Router {
 			// think about adding version matcher here?
 			m.Path(versionMatcher + r.Path()).Methods(r.Method()).Handler(f)
 			m.Path(r.Path()).Methods(r.Method()).Handler(f)
-
-			// error handler for when reach a part of the site that user shouldnt go?
 		}
 	}
+	notFoundHandler := httputils.MakeErrorHandler(pageNotFoundError{})
+	// error handler when users try to type a legit API
+	m.HandleFunc(versionMatcher+"/{path:.*}", notFoundHandler)
+	// error handler for when reach a part of the site that user shouldnt go?
+	m.NotFoundHandler = notFoundHandler
+	m.MethodNotAllowedHandler = notFoundHandler
 	return m
 }
