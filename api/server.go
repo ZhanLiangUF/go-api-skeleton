@@ -92,7 +92,7 @@ func (s *Server) makeHTTPHandler(handler httputils.APIFunc) http.HandlerFunc {
 		}
 		// have to take care of error here
 		if err := handlerFunc(ctx, w, r, vars), err != nil {
-			
+			statusCode := errdefs.GetHTTPErrorStatusCode(err)
 		}
 
 	}
@@ -110,7 +110,6 @@ func (s *Server) createMux() *mux.Router {
 	for _, apiRouter := range s.routers {
 		for _, r := range apiRouter.Routes() {
 			f := s.makeHTTPHandler(r.Handler())
-			// think about adding version matcher here?
 			m.Path(versionMatcher + r.Path()).Methods(r.Method()).Handler(f)
 			m.Path(r.Path()).Methods(r.Method()).Handler(f)
 		}

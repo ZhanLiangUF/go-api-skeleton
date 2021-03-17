@@ -3,7 +3,7 @@ import "net/http"
 
 func GetHTTPErrorStatusCode(err error) int {
 	if err == nil {
-
+		// log internal server error
 	}
 
 	var statusCode int
@@ -11,5 +11,8 @@ func GetHTTPErrorStatusCode(err error) int {
 	switch {
 	case IsNotFound(err):
 		statusCode = http.StatusNotFound
+	case IsInvalidParameter(err):
+		statusCode = http.StatusBadRequest
 	}
+	return statusCode
 }
