@@ -93,6 +93,9 @@ func (s *Server) makeHTTPHandler(handler httputils.APIFunc) http.HandlerFunc {
 		// have to take care of error here
 		if err := handlerFunc(ctx, w, r, vars), err != nil {
 			statusCode := errdefs.GetHTTPErrorStatusCode(err)
+			if statusCode >= 500 {
+				// log 
+			}
 		}
 
 	}

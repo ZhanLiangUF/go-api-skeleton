@@ -24,4 +24,5 @@ func IsNotFound(err error) bool {
 
 func IsInvalidParameter(err error) bool {
 	_, ok := getImplementer(err).(ErrInvalidParameter)
+	return ok
 }
