@@ -112,7 +112,7 @@ func (pageNotFoundError) Error() string {
 	return "page not found"
 }
 
-func (pageNotFoundError) NotFound() {
+func (pageNotFoundError) NotFound() {}
 // createMux initializes the main router
 func (s *Server) createMux() *mux.Router {
 	m := mux.NewRouter()
