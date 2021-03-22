@@ -106,6 +106,13 @@ func (s *Server) InitRouters(routers ...router.Router) {
 	s.routers = append(s.routers, routers...)
 }
 
+type pageNotFoundError struct{}
+
+func (pageNotFoundError) Error() string {
+	return "page not found"
+}
+
+func (pageNotFoundError) NotFound() {
 // createMux initializes the main router
 func (s *Server) createMux() *mux.Router {
 	m := mux.NewRouter()
