@@ -17,11 +17,13 @@ func getImplementer(err error) error {
 	}
 }
 
+// IsNotFound returns if the error passed in is an ErrNotFound
 func IsNotFound(err error) bool {
 	_, ok := getImplementer(err).(ErrNotFound)
 	return ok
 }
 
+// IsInvalidParameter returns if error passed in is ErrInvalidParameter
 func IsInvalidParameter(err error) bool {
 	_, ok := getImplementer(err).(ErrInvalidParameter)
 	return ok

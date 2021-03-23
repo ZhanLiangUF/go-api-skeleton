@@ -1,6 +1,7 @@
 package errdefs // import "github.com/ZhanLiangUF/go-flights/errdefs"
 import "net/http"
 
+// GetHTTPErrorStatusCode returns status code from error.
 func GetHTTPErrorStatusCode(err error) int {
 	if err == nil {
 		// log internal server error

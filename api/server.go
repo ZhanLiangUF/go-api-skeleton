@@ -85,7 +85,7 @@ func (s *HTTPServer) Close() error {
 
 func (s *Server) makeHTTPHandler(handler httputils.APIFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		handlerFunc := s.handlerWithGlobalMiddleWare(handler)
+		handlerFunc := s.handlerWithGlobalMiddlewares(handler)
 		vars := mux.Vars(r)
 		if vars == nil {
 			vars = make(map[string]string)
