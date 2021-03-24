@@ -1,0 +1,16 @@
+swagger: "2.0"
+schemes:
+  - "http"
+  - "https"
+produces:
+  - "application/json"
+  - "text/plain"
+consumes:
+  - "application/json"
+  - "text/plain"
+basePath: "/v1.0.0"
+info:
+  title: "Go-Skeleton API"
+  version: "1.0.0"
+  description: |
+    "The Go-Skeleton API is an HTTP API"
