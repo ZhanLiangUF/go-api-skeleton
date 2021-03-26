@@ -7,6 +7,7 @@ import (
 	"github.com/ZhanLiangUF/go-flights/api/httputils"
 	"github.com/ZhanLiangUF/go-flights/api/middleware"
 	router "github.com/ZhanLiangUF/go-flights/api/router"
+	"github.com/ZhanLiangUF/go-flights/errdefs"
 	"github.com/gorilla/mux"
 )
 
@@ -90,11 +91,11 @@ func (s *Server) makeHTTPHandler(handler httputils.APIFunc) http.HandlerFunc {
 		if vars == nil {
 			vars = make(map[string]string)
 		}
-		// have to take care of error here
-		if err := handlerFunc(ctx, w, r, vars), err != nil {
+		// How to use context? And what is it for?
+		if err := handlerFunc(ctx, w, r, vars); err != nil {
 			statusCode := errdefs.GetHTTPErrorStatusCode(err)
 			if statusCode >= 500 {
-				// log 
+				// log
 			}
 		}
 
@@ -113,6 +114,7 @@ func (pageNotFoundError) Error() string {
 }
 
 func (pageNotFoundError) NotFound() {}
+
 // createMux initializes the main router
 func (s *Server) createMux() *mux.Router {
 	m := mux.NewRouter()

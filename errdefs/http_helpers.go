@@ -14,6 +14,24 @@ func GetHTTPErrorStatusCode(err error) int {
 		statusCode = http.StatusNotFound
 	case IsInvalidParameter(err):
 		statusCode = http.StatusBadRequest
+	case IsConflict(err):
+		statusCode = http.StatusConflict
+	case IsUnauthorized(err):
+		statusCode = http.StatusUnauthorized
+	case IsUnavailable(err):
+		statusCode = http.StatusServiceUnavailable
+	case IsForbidden(err):
+		statusCode = http.StatusForbidden
+	case IsNotModified(err):
+		statusCode = http.StatusNotModified
+	case IsNotImplemented(err):
+		statusCode = http.StatusNotImplemented
+	case IsSystem(err) || IsUnknown(err) || IsDataLoss(err) || IsDeadline(err) || IsCancelled(err):
+		statusCode = http.StatusInternalServerError
+	}
+
+	if statusCode == 0 {
+		statusCode = http.StatusInternalServerError
 	}
 	return statusCode
 }
