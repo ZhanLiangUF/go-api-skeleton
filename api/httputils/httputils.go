@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/ZhanLiangUF/go-flights/api/types"
 	"github.com/ZhanLiangUF/go-flights/errdefs"
 )
 
@@ -15,6 +16,9 @@ func MakeErrorHandler(err error) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// get the status code and access get version variable from path to see if it's a legit API version
 		statusCode := errdefs.GetHTTPErrorStatusCode(err)
-
+		response := &types.ErrorResponse{
+			Message: err.Error(),
+		}
+		_ = WriteJSON(w, statusCode, response)
 	}
 }
