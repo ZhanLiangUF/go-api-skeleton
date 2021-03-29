@@ -1,13 +1,13 @@
-package api // import "github.com/ZhanLiangUF/go-flights/api"
+package api // import "github.com/ZhanLiangUF/go-api-skeleton/api"
 
 import (
 	"net"
 	"net/http"
 
-	"github.com/ZhanLiangUF/go-flights/api/httputils"
-	"github.com/ZhanLiangUF/go-flights/api/middleware"
-	router "github.com/ZhanLiangUF/go-flights/api/router"
-	"github.com/ZhanLiangUF/go-flights/errdefs"
+	"github.com/ZhanLiangUF/go-api-skeleton/api/httputils"
+	"github.com/ZhanLiangUF/go-api-skeleton/api/middleware"
+	router "github.com/ZhanLiangUF/go-api-skeleton/api/router"
+	"github.com/ZhanLiangUF/go-api-skeleton/errdefs"
 	"github.com/gorilla/mux"
 )
 

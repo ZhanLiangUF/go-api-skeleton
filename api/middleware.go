@@ -1,4 +1,4 @@
-package api // import "github.com/zhanlianguf/go-flights/api"
+package api // import "github.com/zhanlianguf/go-api-skeleton/api"
 
 import (
 	"github.com/ZhanLiangUF/go-flights/api/httputils"

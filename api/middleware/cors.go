@@ -1,4 +1,4 @@
-package middleware // import "github.com/zhanlianguf/go-flights/api/middleware"
+package middleware // import "github.com/zhanlianguf/go-api-skeleton/api/middleware"
 import (
 	"context"
 	"net/http"

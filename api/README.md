@@ -1,8 +1,6 @@
-# Working on the Flights API
+# Working on the go-api-skeleton API
 
-The Flights API is an API that will be used by the angular client to communicate with the persistent servers. 
-
-It consists of various components in this repository:
+The go-api-skeleton consists of various components in this repository:
 
 - `api/swagger.yaml` A Swagger definition of the API.
 - `api/types/` Types shared by both the client and server, representing various objects, options, responses, etc. Most are written manually, but some are automatically generated from the Swagger definition. 

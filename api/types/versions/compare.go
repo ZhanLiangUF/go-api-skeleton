@@ -1,4 +1,4 @@
-package versions // import "github.com/zhanlianguf/go-flights/types/versions"
+package versions // import "github.com/zhanlianguf/go-api-skeleton/types/versions"
 
 import (
 	"strconv"

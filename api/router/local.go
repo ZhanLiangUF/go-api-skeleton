@@ -1,4 +1,4 @@
-package router //import github.com/ZhanLiangUF/go-flights/api/router
+package router //import github.com/ZhanLiangUF/go-api-skeleton/api/router
 
 import (
 	"net/http"

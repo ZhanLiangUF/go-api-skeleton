@@ -1,11 +1,11 @@
-package httputils // import "github.com/ZhanLiangUf/go-flights/api/httputil
+package httputils // import "github.com/ZhanLiangUf/go-api-skeleton/api/httputil
 
 import (
 	"context"
 	"net/http"
 
-	"github.com/ZhanLiangUF/go-flights/api/types"
-	"github.com/ZhanLiangUF/go-flights/errdefs"
+	"github.com/ZhanLiangUF/go-api-skeleton/api/types"
+	"github.com/ZhanLiangUF/go-api-skeleton/errdefs"
 )
 
 // APIFunc is an adapter to allow the use of ordinary functions as API endpoints.

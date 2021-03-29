@@ -1,4 +1,4 @@
-package types // import "github.com/ZhanLiangUf/go-flights/api/types
+package types // import "github.com/ZhanLiangUf/go-api-skeleton/api/types
 
 // ErrorResponse Represents an Error
 type ErrorResponse struct {

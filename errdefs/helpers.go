@@ -1,4 +1,4 @@
-package errdefs //// import "github.com/ZhanLiangUF/go-flights/errdefs"
+package errdefs //// import "github.com/ZhanLiangUF/go-api-skeleton/errdefs"
 
 type errNotFound struct{ error }
 

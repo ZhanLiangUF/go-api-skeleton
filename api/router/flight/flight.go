@@ -1,6 +1,6 @@
-package flight // import "github.com/ZhanLiangUF/go-flights/api/router/flights"
+package flight // import "github.com/ZhanLiangUFgo-api-skeleton/api/router/flights"
 import (
-	router "github.com/ZhanLiangUF/go-flights/api/router"
+	router "github.com/ZhanLiangUF/go-api-skeleton/api/router"
 )
 
 type flightRouter struct {

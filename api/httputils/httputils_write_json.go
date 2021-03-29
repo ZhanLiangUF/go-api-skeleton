@@ -1,4 +1,4 @@
-package httputils //import "github.com/ZhanLiangUf/go-flights/api/httputil
+package httputils //import "github.com/ZhanLiangUf/go-api-skeleton/api/httputil
 
 import (
 	"encoding/json"
