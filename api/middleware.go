@@ -1,7 +1,7 @@
 package api // import "github.com/zhanlianguf/go-api-skeleton/api"
 
 import (
-	"github.com/ZhanLiangUF/go-flights/api/httputils"
+	"github.com/ZhanLiangUF/go-api-skeleton/api/httputils"
 )
 
 // handlerWithGlobalMiddlewares wraps handler function with server's global middleware

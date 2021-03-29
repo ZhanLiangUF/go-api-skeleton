@@ -1,4 +1,4 @@
-module github.com/ZhanLiangUF/go-flights
+module github.com/ZhanLiangUF/go-api-skeleton
 
 go 1.15
 

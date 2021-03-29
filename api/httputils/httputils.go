@@ -1,4 +1,4 @@
-package httputils // import "github.com/ZhanLiangUf/go-api-skeleton/api/httputil
+package httputils // import "github.com/ZhanLiangUf/go-api-skeleton/api/httputils
 
 import (
 	"context"

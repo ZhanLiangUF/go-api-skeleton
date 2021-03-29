@@ -1,6 +1,6 @@
 package router // import "github.com/ZhanLiangUF/go-api-skeleton/api/router"
 
-import "github.com/ZhanLiangUF/go-flights/api/httputils"
+import "github.com/ZhanLiangUF/go-api-skeleton/api/httputils"
 
 // Router defines an interface to specify the list of routes to add to the server
 type Router interface {

@@ -3,7 +3,7 @@ package router //import github.com/ZhanLiangUF/go-api-skeleton/api/router
 import (
 	"net/http"
 
-	"github.com/ZhanLiangUF/go-flights/api/httputils"
+	"github.com/ZhanLiangUF/go-api-skeleton/api/httputils"
 )
 
 // RouteWrapper wraps a route to provide it extra functionality. This function type describes a function with the same parameters and same result type
