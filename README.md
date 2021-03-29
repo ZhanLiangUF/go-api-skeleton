@@ -1,1 +1,1 @@
-# go-flights
+# go-api-skeleton
