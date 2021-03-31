@@ -4,6 +4,8 @@ import (
 	"log"
 	"os"
 
+	router "github.com/ZhanLiangUF/go-api-skeleton/api/router"
+	"github.com/ZhanLiangUF/go-api-skeleton/api/router/test"
 	"github.com/ZhanLiangUF/go-api-skeleton/pkg/jsonmessage"
 	"github.com/sirupsen/logrus"
 )
@@ -22,6 +24,10 @@ func main() {
 		logrus.Error(err)
 	} else {
 		log.SetOutput(f)
+	}
+
+	routers := []router.Router{
+		test.NewRouter(),
 	}
 
 }

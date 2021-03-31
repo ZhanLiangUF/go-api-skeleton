@@ -155,3 +155,13 @@ func (s *Server) createMux() *mux.Router {
 	m.MethodNotAllowedHandler = notFoundHandler
 	return m
 }
+
+// Wait blocks server goroutine until it exits
+// func (s *Server) Wait(waitChan chan error) {
+// 	if err := s.ServeAPI(); err != nil {
+// 		logrus.Errorf("ServeAPI error: %v", err)
+// 		waitChan <- err
+// 		return
+// 	}
+// 	waitChan <- nil
+// }
