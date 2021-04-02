@@ -50,4 +50,7 @@ func main() {
 	// unpacks the slice with ellipses after the slice
 	api.InitRouters(routers...)
 
+	if err := api.ServeAPI(); err != nil {
+		logrus.Errorf("ServeAPI error: %v", err)
+	}
 }
