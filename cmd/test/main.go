@@ -17,7 +17,7 @@ func main() {
 	initLogging()
 
 	newConfig()
-
+	// TODO: Unmarshal config
 	config := &api.Config{}
 	api := api.New(config)
 

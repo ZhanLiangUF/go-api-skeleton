@@ -16,3 +16,6 @@
 
 # log files
 *.log
+
+# vscode files
+.vscode
