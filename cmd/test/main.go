@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net"
 	"os"
 
@@ -11,9 +10,44 @@ import (
 	"github.com/ZhanLiangUF/go-api-skeleton/api/router/test"
 	"github.com/ZhanLiangUF/go-api-skeleton/pkg/jsonmessage"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 func main() {
+	initLogging()
+
+	newConfig()
+
+	config := &api.Config{}
+	api := api.New(config)
+
+	// accept listener
+	l, _ := net.Listen("tcp", ":0080")
+	api.Accept(":0080", l)
+
+	// use middleware
+
+	// if config.CorsHeader != "" {
+	c := middleware.NewCORSMiddleware(config.CorsHeader)
+	api.UseMiddleware(c)
+	// }
+
+	// if tls?
+
+	// init routers
+	routers := []router.Router{
+		test.NewRouter(),
+	}
+	// unpacks the slice with ellipses after the slice
+	api.InitRouters(routers...)
+
+	if err := api.ServeAPI(); err != nil {
+		logrus.Errorf("ServeAPI error: %v", err)
+	}
+}
+
+// initLogging sets up logger configurations
+func initLogging() {
 	// Set up logging
 	logrus.Info("Set up logger")
 	logrus.SetFormatter(&logrus.TextFormatter{
@@ -26,31 +60,19 @@ func main() {
 	if err != nil {
 		logrus.Error(err)
 	} else {
-		log.SetOutput(f)
+		logrus.SetOutput(f)
+		// set logging mode depending on different environment
+		// logrus.SetLevel(logrus.TraceLevel)
 	}
+}
 
-	config := &api.Config{}
-	api := api.New(config)
+func newConfig() {
+	// Inject config name and path to be use from jenkins?
+	viper.SetConfigName("development")   // name of config file (without extension)
+	viper.SetConfigType("yaml")          // REQUIRED if the config file does not have the extension in the name
+	viper.AddConfigPath("../../configs") // optionally look for config in the working directory
 
-	// accept listener
-	l, _ := net.Listen("tcp", ":3000")
-	api.Accept(":3000", l)
-
-	// use middleware
-	if config.CorsHeader != "" {
-		c := middleware.NewCORSMiddleware(config.CorsHeader)
-		api.UseMiddleware(c)
-	}
-	// if tls?
-
-	// init routers
-	routers := []router.Router{
-		test.NewRouter(),
-	}
-	// unpacks the slice with ellipses after the slice
-	api.InitRouters(routers...)
-
-	if err := api.ServeAPI(); err != nil {
-		logrus.Errorf("ServeAPI error: %v", err)
+	if err := viper.ReadInConfig(); err != nil {
+		logrus.Fatalf("Unable to read in configuration file: %v", err)
 	}
 }

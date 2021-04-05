@@ -1,0 +1,6 @@
+database: "n/a"
+
+server:
+  port: 80
+
+logging: true
