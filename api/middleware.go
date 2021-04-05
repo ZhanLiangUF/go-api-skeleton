@@ -6,6 +6,11 @@ import (
 
 // handlerWithGlobalMiddlewares wraps handler function with server's global middleware
 func (s *Server) handlerWithGlobalMiddlewares(handler httputils.APIFunc) httputils.APIFunc {
-	m := s.middleware.WrapHandler(handler)
-	return m
+	next := handler
+
+	for _, m := range s.middlewares {
+		next = m.WrapHandler(next)
+	}
+
+	return next
 }

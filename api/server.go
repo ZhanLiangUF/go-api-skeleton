@@ -29,10 +29,10 @@ type Config struct {
 
 // Server contains instance details of the server
 type Server struct {
-	cfg        *Config
-	routers    []router.Router
-	srv        *HTTPServer
-	middleware middleware.Middleware
+	cfg         *Config
+	routers     []router.Router
+	srv         *HTTPServer
+	middlewares []middleware.Middleware
 }
 
 // New returns a new instance of the server based on the specified configurations
@@ -45,7 +45,7 @@ func New(cfg *Config) *Server {
 // UseMiddleware sets a new middleware to the request chain.
 // Needs to be called before API are configured
 func (s *Server) UseMiddleware(m middleware.Middleware) {
-	s.middleware = m
+	s.middlewares = append(s.middlewares, m)
 }
 
 // Accept sets listener the server accepts connection into
