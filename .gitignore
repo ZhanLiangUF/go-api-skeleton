@@ -17,5 +17,5 @@
 # log files
 *.log
 
-# vscode files
+# vscode directory
 /.vscode
