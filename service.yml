@@ -6,6 +6,7 @@ metadata:
     name: go-api-skeleton
 spec:
     type: LoadBalancer # "LoadBalancer" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the same endpoints as the clusterIP.
+    ports:
     - name: http
       port: 80 # the port that will be exposed by the service
       targetPort: 3000 # number of the port to access on the pods targeted by the service
