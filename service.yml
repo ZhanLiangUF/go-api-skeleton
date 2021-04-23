@@ -9,5 +9,6 @@ spec:
     ports:
     - name: http
       port: 80 # the port that will be exposed by the service
+      targetPort: 80 # number of the port to access on the pods targeted by the service
     selector: # Route service traffic to pods with label keys and values matching this selector
       app: go-api-skeleton

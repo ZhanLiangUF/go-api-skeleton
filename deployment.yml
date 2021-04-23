@@ -18,4 +18,4 @@ spec:
               image: zhanlianguf/go-api-skeleton:v1.0
               imagePullPolicy: IfNotPresent
               ports:
-                - containerPort: 3000 # number of port to be exposed on the pod's IP address. What is a good port number for pods?
+                - containerPort: 80 # number of port to be exposed on the pod's IP address. What is a good port number for pods?
