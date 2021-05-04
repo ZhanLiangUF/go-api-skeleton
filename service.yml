@@ -12,3 +12,15 @@ spec:
       targetPort: 80 # number of the port to access on the pods targeted by the service
     selector: # Route service traffic to pods with label keys and values matching this selector
       app: go-api-skeleton
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+spec:
+  type: NodePort
+  ports:
+  - port: 4000
+    targetPort: 4000
+  selector:
+    app: jenkins
