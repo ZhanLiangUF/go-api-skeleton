@@ -18,9 +18,17 @@ kind: Service
 metadata:
   name: jenkins
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
-  - port: 8080
+  - name: ui
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  - name: slave
+    port: 50000
+    protocol: TCP
+  - name: http
+    port: 80
     targetPort: 8080
   selector:
     app: jenkins
