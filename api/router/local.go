@@ -44,3 +44,33 @@ func NewRoute(method, path string, handler httputils.APIFunc, opts ...RouteWrapp
 func NewGetRoute(path string, handler httputils.APIFunc, opts ...RouteWrapper) Route {
 	return NewRoute(http.MethodGet, path, handler, opts...)
 }
+
+// NewPutRoute initializes a new route with the http method PUT
+func NewPutRoute(path string, handler httputils.APIFunc, opts ...RouteWrapper) Route {
+	return NewRoute(http.MethodPut, path, handler, opts...)
+}
+
+// NewDeleteRoute initializes a new route with the http method DELETE
+func NewDeleteRoute(path string, handler httputils.APIFunc, opts ...RouteWrapper) Route {
+	return NewRoute(http.MethodDelete, path, handler, opts...)
+}
+
+// NewPatchRoute initializes a new route with the http method PATCH
+func NewPatchRoute(path string, handler httputils.APIFunc, opts ...RouteWrapper) Route {
+	return NewRoute(http.MethodPatch, path, handler, opts...)
+}
+
+// NewPostRoute initializes a new route with the http method POST
+func NewPostRoute(path string, handler httputils.APIFunc, opts ...RouteWrapper) Route {
+	return NewRoute(http.MethodPost, path, handler, opts...)
+}
+
+// NewHeadRoute initializes a new route with the http method HEAD
+func NewHeadRoute(path string, handler httputils.APIFunc, opts ...RouteWrapper) Route {
+	return NewRoute(http.MethodHead, path, handler, opts...)
+}
+
+// NewOptionsRoute initializes a new route with the http method OPTIONS
+func NewOptionsRoute(path string, handler httputils.APIFunc, opts ...RouteWrapper) Route {
+	return NewRoute(http.MethodOptions, path, handler, opts...)
+}
