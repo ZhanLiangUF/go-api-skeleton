@@ -12,23 +12,3 @@ spec:
       targetPort: 80 # number of the port to access on the pods targeted by the service
     selector: # Route service traffic to pods with label keys and values matching this selector
       app: go-api-skeleton
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: jenkins
-spec:
-  type: ClusterIP
-  ports:
-  - name: ui
-    port: 8080
-    targetPort: 8080
-    protocol: TCP
-  - name: slave
-    port: 50000
-    protocol: TCP
-  - name: http
-    port: 80
-    targetPort: 8080
-  selector:
-    app: jenkins
