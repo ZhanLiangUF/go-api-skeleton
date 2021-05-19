@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jenkins
+  labels: # labels enable users to map organizational structure onto system objects in a loosely coupled fashion without requiring clients to store these mappings
+    app: jenkins 
 spec:
   replicas: 1
   selector:
@@ -12,6 +14,7 @@ spec:
       labels:
         app: jenkins
     spec:
+      serviceAccountName: jenkins
       containers:
       - name: jenkins
         image: jenkins/jenkins:lts-jdk11
@@ -21,8 +24,11 @@ spec:
         - containerPort: 50000
           protocol: TCP
         volumeMounts:
-        - name: jenkins-home
-          mountPath: /var/jenkins_home
+        - mountPath: /var/jenkins_home
+          name: jenkins-pv
+      securityContext:
+        runAsUser: 0
       volumes:
-      - name: jenkins-home
-        emptyDir: { }
+      - name: jenkins-pv
+        persistentVolumeClaim:
+          claimName: jenkins-claim
