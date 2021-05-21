@@ -15,6 +15,9 @@ spec:
       containers:
       - name: jenkins
         image: jenkins/jenkins:lts-jdk11
+        env:
+        - name: JAVA_OPTS
+          value: -Xmx2048m -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85
         ports:
         - containerPort: 8080
           protocol: TCP
